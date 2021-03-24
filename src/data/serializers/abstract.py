@@ -6,7 +6,7 @@ import pyxis as px
 from tqdm import tqdm
 
 
-class DatasetSaver(ABC):
+class AbstractSerializer(ABC):
     def __init__(self, target_path):
         self._target_path = target_path
 
@@ -30,8 +30,6 @@ class DatasetSaver(ABC):
             target_dataset_path = self._get_target_dataset_path(dataset_name)
             with px.Writer(dirpath=target_dataset_path, map_size_limit=10000000, ram_gb_limit=1024) as db:
                 dataset = self._get_dataset(dataset_name)
-                for i, data in enumerate(tqdm(dataset)):
-                    # if i == 10:
-                    #     break
+                for data in tqdm(dataset):
                     preprocessed_data = self._preprocess_data(data)
                     db.put_samples(preprocessed_data)

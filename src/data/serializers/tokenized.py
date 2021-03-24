@@ -5,12 +5,12 @@ from pathlib import Path
 import numpy as np
 from transformers import BertTokenizer, BertConfig
 
-from src.data.abstract_dataset_saver import DatasetSaver
+from src.data.serializers.abstract import AbstractSerializer
 
 
-class TokenizedDatasetSaver(DatasetSaver):
+class TokenizedSerializer(AbstractSerializer):
     def __init__(self, target_path):
-        super(TokenizedDatasetSaver, self).__init__(target_path)
+        super().__init__(target_path)
         config = BertConfig.from_json_file(
             'resources/sentence_ru_cased_L-12_H-768_A-12_pt/bert_config.json'
         )
