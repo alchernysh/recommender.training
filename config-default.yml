@@ -1,0 +1,11 @@
+device:
+  name: cpu
+  number: 0
+
+dataset:
+  path:
+    tokenized: data/processed/tokenized
+    bert_featured: data/processed/bert_featured
+  serializer:
+    batch_size: 2
+
