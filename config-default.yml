@@ -9,3 +9,8 @@ dataset:
   serializer:
     batch_size: 2
 
+train:
+  id: null
+  mode: start
+  batch_size: 16
+  epochs: 100

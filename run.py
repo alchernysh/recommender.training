@@ -7,8 +7,7 @@ import random
 import numpy as np
 
 from src.utils.config import Config
-from src.runners import serialize_bert_featured, serialize_tokenized
-
+from src.runners import serialize_bert_featured, serialize_tokenized, train
 
 np.random.seed(0)
 random.seed(0)
@@ -18,6 +17,7 @@ torch.manual_seed(0)
 commands = {
     'serialize_bert_featured': serialize_bert_featured,
     'serialize_tokenized': serialize_tokenized,
+    'train': train,
 }
 
 if __name__ == '__main__':
