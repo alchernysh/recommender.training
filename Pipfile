@@ -8,6 +8,7 @@ torch = "==1.7.1"
 transformers = "==3.5.1"
 tqdm = "*"
 ml-pyxis = {file = "https://github.com/vicolab/ml-pyxis/archive/master.zip"}
+easydict = "*"
 
 [dev-packages]
 
