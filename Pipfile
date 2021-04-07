@@ -11,6 +11,8 @@ ml-pyxis = {file = "https://github.com/vicolab/ml-pyxis/archive/master.zip"}
 pytorch-lightning = "*"
 tensorboard = "*"
 easydict = "*"
+onnx = "*"
+ml2rt = "*"
 
 [dev-packages]
 

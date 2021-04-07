@@ -7,7 +7,8 @@ import random
 import numpy as np
 
 from src.utils.config import Config
-from src.runners import serialize_bert_featured, serialize_tokenized, train
+from src.runners import serialize_bert_featured, serialize_tokenized, train, save, generate_embeddings
+
 
 np.random.seed(0)
 random.seed(0)
@@ -18,6 +19,8 @@ commands = {
     'serialize_bert_featured': serialize_bert_featured,
     'serialize_tokenized': serialize_tokenized,
     'train': train,
+    'generate_embeddings': generate_embeddings,
+    'save': save,
 }
 
 if __name__ == '__main__':

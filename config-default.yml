@@ -1,5 +1,5 @@
 device:
-  name: cpu
+  name: cuda
   number: 0
 
 dataset:
@@ -50,3 +50,10 @@ train:
   batch_size: 16
   epochs: 100
   learning_rate: cyclic_lr
+
+generate_embeddings:
+  init_weights: logs/best.ckpt
+  embeddings_json: /data/embeddings.json
+
+save:
+  init_weights: logs/best.ckpt

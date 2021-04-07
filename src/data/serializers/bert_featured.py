@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import torch
 import numpy as np
-import pyxis.torch as pxt
 from transformers import BertConfig, BertModel
 
 from src.data.serializers.abstract import AbstractSerializer
