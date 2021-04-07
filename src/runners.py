@@ -57,11 +57,7 @@ def train(config):
         monitor='val_loss',
     )
     tensorboard_callback = TensorboardCallback(train_id)
-    model = HeadModelTraining(
-        config.dataset.path.bert_featured,
-        config.train.batch_size,
-    )
-
+    training_model = HeadModelTraining(config)
     trainer_params = {
         'gpus': 0 if config.device.name == 'cpu' else config.device.number,
         'max_epochs': config.train.epochs,
@@ -79,4 +75,4 @@ def train(config):
         )
     
     trainer = pl.Trainer(**trainer_params)
-    trainer.fit(model)
+    trainer.fit(training_model)

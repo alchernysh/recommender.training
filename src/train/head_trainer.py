@@ -3,16 +3,18 @@ import torch.nn as nn
 import torch.optim as optim
 import pytorch_lightning as pl
 
-from src.model import HeadModel
+from src.models.head import HeadModel
 from src.data.dataloader import get_dataloader
+from src.train.lr_schedulers import get_lr_scheduler
 
 
 class HeadModelTraining(pl.LightningModule):
-    def __init__(self, dataset_path, batch_size):
+    def __init__(self, config):
         super().__init__()
-        self.dataset_path = dataset_path
-        self.batch_size = batch_size
+        self.dataset_path = config.dataset.path.bert_featured
+        self.batch_size = config.train.batch_size
         self.model = HeadModel()
+        self.lr_scheduler = get_lr_scheduler(config)
         self.loss = nn.L1Loss()
         self.metric = nn.MSELoss()
 
@@ -56,16 +58,10 @@ class HeadModelTraining(pl.LightningModule):
     def configure_optimizers(self):
         optimizer = optim.SGD(self.parameters(), lr=0.1, momentum=0.9)
         lr_scheduler = {
-            'scheduler': optim.lr_scheduler.CyclicLR(
-                optimizer,
-                base_lr=0.001,
-                max_lr=0.1,
-                step_size_up=50,
-                mode="triangular2"
-            ),
+            'scheduler': self.lr_scheduler(optimizer),
             'name': 'learning_rate',
             'interval': 'step',
-            'frequency': 100,
+            'frequency': 1000
         }
 
         return [optimizer], [lr_scheduler]
