@@ -10,7 +10,9 @@ class EmbeddingModel(nn.Module):
         self.max_pool = nn.MaxPool1d(5)
         self.dropout = nn.Dropout(0.3)
         self.flatten = torch.nn.Flatten()
-        self.fc = nn.Linear(39168, 1024)
+        self.fc1 = nn.Linear(39168, 1024)
+        self.elu = nn.ELU()
+        self.fc2 = nn.Linear(1024, 1024)
 
     def forward(self, x):
         x = torch.cat(
@@ -19,5 +21,7 @@ class EmbeddingModel(nn.Module):
         )
         x = self.dropout(x)
         x = self.flatten(x)
-        x = self.fc(x)
+        x = self.fc1(x)
+        x = self.elu(x)
+        x = self.fc2(x)
         return x
