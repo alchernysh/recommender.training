@@ -1,0 +1,59 @@
+device:
+  name: cuda
+  number: 0
+
+dataset:
+  path:
+    tokenized: data/processed/tokenized
+    bert_featured: data/processed/bert_featured
+  serializer:
+    batch_size: 2
+
+learning_rate_schedulers:
+  cyclic_lr:
+    base_lr: 0.0001
+    max_lr: 0.1
+    step_size_up: 100
+    mode: triangular2
+  lambda_lr:
+    multiplier: 0.65
+  multiplicative_lr:
+    multiplier: 0.65
+  step_lr:
+    step_size: 2
+    gamma: 0.1
+  multi_step_lr:
+    milestones:
+      - 6
+      - 8
+      - 9
+    gamma: 0.1
+  exponential_lr:
+    gamma: 0.1
+  cosine_annealing_lr:
+    T_max: 10
+    eta_min: 0
+  one_cycle_lr:
+    max_lr: 0.1
+    steps_per_epoch: 10
+    epochs: 10
+    anneal_strategy: 'linear'
+  cosine_annealing_warm_restarts:
+    T_0: 10
+    T_mult: 1
+    eta_min: 0.001
+    last_epoch: -1
+
+train:
+  id: null
+  mode: start
+  batch_size: 16
+  epochs: 100
+  learning_rate: cyclic_lr
+
+generate_embeddings:
+  init_weights: logs/best.ckpt
+  embeddings_json: /data/embeddings.json
+
+save:
+  init_weights: logs/best.ckpt
